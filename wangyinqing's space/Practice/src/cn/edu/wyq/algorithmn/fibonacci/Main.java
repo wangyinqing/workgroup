@@ -14,7 +14,6 @@ public class Main {
 		String input = scan.next();
 		while(!"exit".equalsIgnoreCase(input)){
 			long time = System.nanoTime();
-			long time2 = System.currentTimeMillis();
 			try{
 				long number = Long.parseLong(input);
 				long result = Fibonacci.ITERARION.calculate(number);
@@ -22,8 +21,7 @@ public class Main {
 			}catch(IllegalArgumentException e){
 				logger.info(e.getMessage());
 			}
-			System.out.println(System.nanoTime() - time);
-			System.out.println(System.currentTimeMillis() - time2);
+			System.out.println((System.nanoTime() - time)/1000000.0);
 			input = scan.next();
 		}
 		scan.close();
