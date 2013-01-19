@@ -1,4 +1,4 @@
-package cn.edu.wyq.algorithmn.fibonacci;
+package cn.edu.wyq.algorithm.fibonacci;
 
 import java.util.Scanner;
 import java.util.logging.Logger;
