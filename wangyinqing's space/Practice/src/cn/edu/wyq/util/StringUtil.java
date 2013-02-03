@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class StringUtil {
 	
-	public static <E>String combine2String(Collection<E> c, String delimiter){
+	public static <E> String combine2String(Collection<E> c, String delimiter){
 		if(c == null){
 			return null;
 		}else{
@@ -19,6 +19,21 @@ public class StringUtil {
 			}
 			return sb.toString();
 		}
+	}
+	
+	public static <E> String combine2String(E[] a, String delimiter){
+		if(a == null){
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		int length = a.length;
+		int index = 0;
+		while(index < length){
+			sb.append(a[index++]);
+			if(index<length)
+				sb.append(delimiter);
+		}
+		return sb.toString();
 	}
 
 }
