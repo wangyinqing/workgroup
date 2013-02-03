@@ -1,0 +1,90 @@
+package cn.edu.wyq.datastructure.binarytree;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinaryTree<E extends Comparable<? super E>> {
+	TreeNode<E> root;
+	
+	public void insert(E e){
+		if(root == null)
+			root = new TreeNode<E>(e); // if root is null, build root
+		else{
+			TreeNode<E> current = root;
+			TreeNode<E> parent;
+			for(;;){
+				parent = current;
+				if(e.compareTo(current.value) < 0){
+					current = current.left;
+					if(current == null){
+						parent.left = new TreeNode<E>(e);
+						break;
+					}
+				}else{
+					current = current.right;
+					if(current == null){
+						parent.right = new TreeNode<E>(e);
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	public List<E> preOrder(){
+		return preOrder(root, new ArrayList<E>());
+	}
+	
+	public List<E> preOrder(TreeNode<E> node, List<E> list){
+		if(node != null){
+			list.add(node.value);
+			inOrder(node.left, list);
+			inOrder(node.right, list);
+		}
+		return list;
+	}
+	
+	public List<E> inOrder(){
+		return inOrder(root, new ArrayList<E>());
+	}
+	
+	public List<E> inOrder(TreeNode<E> node, List<E> list){
+		if(node != null){
+			inOrder(node.left, list);
+			list.add(node.value);
+			inOrder(node.right, list);
+		}
+		return list;
+	}
+	
+	public List<E> postOrder(){
+		return postOrder(root, new ArrayList<E>());
+	}
+	
+	public List<E> postOrder(TreeNode<E> node, List<E> list){
+		if(node != null){
+			inOrder(node.left, list);
+			inOrder(node.right, list);
+			list.add(node.value);
+		}
+		return list;
+	}
+	
+	public boolean contains(E e){
+		TreeNode<E> current =root;
+		while(e.compareTo(current.value) != 0){
+			if(e.compareTo(current.value) < 0)
+				current = current.left;
+			else
+				current = current.right;
+			if(current == null)
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean delete(E e){
+		return true;
+	}
+
+}
