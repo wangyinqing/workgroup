@@ -14,13 +14,6 @@ public class Main {
 		BinaryTree<Integer> btree = new BinaryTree<Integer>();
 		String s = scan.next();
 		while (!"q".equalsIgnoreCase(s)) {
-			if (s.startsWith("i")) {
-				try {
-					int i = Integer.parseInt(s.substring(1, s.length()));
-					btree.insert(i);
-				} catch (NumberFormatException e) {
-				}
-			}
 			if (s.startsWith("f")) {
 				try {
 					int i = Integer.parseInt(s.substring(1, s.length()));
@@ -28,16 +21,19 @@ public class Main {
 					System.out.println("Tree " + (contains ? "has " : "has not ") + i);
 				} catch (NumberFormatException e) {
 				}
-			}
-			if (s.startsWith("din")) {
+			} else if (s.startsWith("in")) {
 				System.out.println(StringUtil.combine2String(btree.inOrder(), ";"));
-			}
-			if (s.startsWith("dpr")) {
+			} else if (s.startsWith("pr")) {
 				System.out.println(StringUtil.combine2String(btree.preOrder(), ";"));
-			}
-			if (s.startsWith("dpo")) {
+			} else if (s.startsWith("po")) {
 				System.out.println(StringUtil.combine2String(btree.postOrder(), ";"));
-			}
+			} else {
+				try {
+					int i = Integer.parseInt(s.substring(1, s.length()));
+					btree.insert(i);
+				} catch (NumberFormatException e) {
+				}
+			}  
 			s = scan.next();
 		}
 		scan.close();

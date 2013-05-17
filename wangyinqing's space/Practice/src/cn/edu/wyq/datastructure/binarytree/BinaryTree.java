@@ -3,6 +3,13 @@ package cn.edu.wyq.datastructure.binarytree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Binary Search Tree
+ * 
+ * @author wangyinqing
+ *
+ * @param <E>
+ */
 public class BinaryTree<E extends Comparable<? super E>> {
 	TreeNode<E> root;
 	
@@ -71,7 +78,7 @@ public class BinaryTree<E extends Comparable<? super E>> {
 	}
 	
 	public boolean contains(E e){
-		TreeNode<E> current =root;
+		TreeNode<E> current = root;
 		while(e.compareTo(current.value) != 0){
 			if(e.compareTo(current.value) < 0)
 				current = current.left;
@@ -84,6 +91,45 @@ public class BinaryTree<E extends Comparable<? super E>> {
 	}
 	
 	public boolean delete(E e){
+		TreeNode<E> current = root;
+		TreeNode<E> parent = null;
+		boolean isLeft = false;
+		while(current.value.compareTo(e) != 0){
+			parent = current;
+			if(current.left.value.compareTo(e) < 0){
+				isLeft = true;
+				current = current.left;
+			}else{
+				isLeft = false;
+				current = current.right;
+			}
+			if(current == null)
+				return false;
+		}
+		if(current.isLeaf()){
+			if(parent == null)
+				root = null;
+			else if(isLeft)
+				parent.left = null;
+			else 
+				parent.right = null;	
+		} else if (current.left == null){
+			if (parent == null)
+				root = current.right;
+			else if(isLeft)
+				parent.left = current.right;
+			else
+				parent.right = current.right;
+		} else if (current.right == null){
+			if (parent == null)
+				root = current.left;
+			else if(isLeft)
+				parent.left = current.left;
+			else
+				parent.right = current.left;
+		} else{
+			
+		}
 		return true;
 	}
 
