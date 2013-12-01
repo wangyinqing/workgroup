@@ -4,15 +4,16 @@ import java.net.UnknownHostException;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
 
 
 @Configuration
-public class MongoAppConfig {
+@EnableMongoRepositories
+public class MongoAppConfig extends AbstractMongoConfiguration {
 	
 	@Bean(name="mongo")
 	public Mongo mongo() throws UnknownHostException{
@@ -21,13 +22,13 @@ public class MongoAppConfig {
 	
 	
 	@Bean(name="mongofacotry")
-	public MongoDbFactory mongoDbFactory() throws Exception {
-		return new SimpleMongoDbFactory(mongo(), "mytest");
+	public SimpleMongoDbFactory mongoDbFactory() throws Exception {
+		return super.mongoDbFactory();
 	}
-	
-	@Bean
-	public MongoTemplate mongoTemplate() throws Exception {
-		return new MongoTemplate(mongoDbFactory());
+
+	@Override
+	protected String getDatabaseName() {
+		return "mytest";
 	}
 
 }
