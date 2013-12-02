@@ -1,6 +1,13 @@
 package org.wyq.nosql.mongo;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="tester")
 public class Person {
+	
+	@Id
+	private String ID;
 
 	private String name;
 	private int age;
@@ -28,9 +35,10 @@ public class Person {
 		this.age = age;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
+		return "Person [ID=" + ID + ", name=" + name + ", age=" + age + "]";
 	}
 
 }
